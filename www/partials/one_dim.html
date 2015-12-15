@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="two columns">&nbsp</div>
+    <div class="eight columns">
+      <div class="params">
+        <div>
+          <label for="plot_type">Plot type</label>
+          <select name="plot_type"
+                  ng-model="opts.plot_type">
+            <option ng-repeat="plot_type in PLOT_TYPES"
+                    value="{{plot_type}}">
+              {{plot_type}}
+            </option>
+          </select>
+        </div>
+        <div>
+          <label for="strategy">Strategy</label>
+          <select name="strategy"
+                  ng-model="opts.strategy">
+            <option ng-repeat="strategy in STRATEGIES"
+                    value="{{strategy}}">
+              {{strategy}}
+            </option>
+          </select>
+        </div>
+
+        <div ng-repeat="model_var in MODEL_VARS">
+
+          <label for="{{model_var.name}}">
+            {{model_var.name}}
+          </label>
+          <input name="{{model_var.name}}"
+                 type="range"
+                 min="{{model_var.bounds[0]}}"
+                 max="{{model_var.bounds[1]}}"
+                 step="{{model_var.step}}"
+                 ng-model="vars[model_var.name]"
+                 >
+          </input>
+          <span>{{vars[model_var.name]}}</span>
+        </div>
+
+        <button ng-click="onPlotClick()">plot</button>
+      </div>
+      <div class="plot">
+        <div bcim-plot plot-data="{{plotData}}">
+        </div>
+      </div>
+    </div>
+    <div class="two columns">&nbsp</div>
+  </div>
+</div>
